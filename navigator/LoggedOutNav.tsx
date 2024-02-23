@@ -9,11 +9,15 @@ const Stack = createStackNavigator();
 
 export default function LoggedOutNav() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerBackTitleVisible: true,
+        headerTintColor: "blue",
+      }}
+    >
       <Stack.Screen name="welcome" component={Welcome} />
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="createAccount" component={CreateAccount} />
     </Stack.Navigator>
   );
 }
-// 스택 네비게이터 리턴하기
