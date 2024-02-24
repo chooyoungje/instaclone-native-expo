@@ -1,4 +1,5 @@
 import React from "react";
+import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import styled from "styled-components/native";
 
 const Container = styled.View`
@@ -16,10 +17,16 @@ const Logo = styled.Image`
 // web애서 보이게 할려면 widhth를 설정해줘야함
 // max-width => 핸드폰
 export default function AuthLayout({ children }: any) {
+  const dismissKeyboard = () => {
+    Keyboard.dismiss();
+    //react native의 keyboard api 사용
+  };
   return (
-    <Container>
-      <Logo resizeMode="center" source={require("../assets/logo.png")} />
-      {children}
-    </Container>
+    <TouchableWithoutFeedback style={{ height: "100%" }} onPress={dismissKeyboard}>
+      <Container>
+        <Logo resizeMode="center" source={require("../assets/logo.png")} />
+        {children}
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }
