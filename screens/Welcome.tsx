@@ -1,21 +1,30 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import styled from "styled-components/native";
+import { colors } from "../color";
+import { TouchableOpacity } from "react-native";
+import AuthButton from "../auth/AuthButton";
+import AuthLayout from "../auth/AuthLayout";
+
+const LoginLink = styled.Text`
+  color: ${colors.blue};
+  font-weight: 600;
+  margin-top: 12px;
+`;
 
 export default function Welcome({ navigation }: any) {
+  const goToCreateAccount = () => navigation.navigate("createAccount");
+  const goToLogin = () => navigation.navigate("login");
   return (
-    <View>
-      <Text>Welcome</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("createAccount")}>
-        <View>
-          <Text>Go to Create Account</Text>
-        </View>
-      </TouchableOpacity>
+    <AuthLayout>
+      <AuthButton disabled={false} onPress={goToCreateAccount} text="Create New Account" />
 
-      <TouchableOpacity onPress={() => navigation.navigate("login")}>
-        <View>
-          <Text>Go to Login</Text>
-        </View>
+      <TouchableOpacity onPress={goToLogin}>
+        <LoginLink>Log in</LoginLink>
       </TouchableOpacity>
-    </View>
+    </AuthLayout>
   );
 }
+
+// resizeMode="center" 로고를 어디다 놓을 건지 정할 수 있는 속성
+// 리액트 네이티브에서 모든 flex 컨테이너는 기본적으로 flex direction이 column임
+// web에서는 기본값이 row임
