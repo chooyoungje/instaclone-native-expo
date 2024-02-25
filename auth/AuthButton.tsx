@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { colors } from "../color";
+import { ActivityIndicator } from "react-native";
 
 const Button = styled.TouchableOpacity`
   background-color: ${colors.blue};
@@ -17,10 +18,10 @@ const ButtonText = styled.Text`
   text-align: center;
 `;
 
-export default function AuthButton({ onPress, disabled, text }: any) {
+export default function AuthButton({ onPress, disabled, text, loading }: any) {
   return (
     <Button disabled={disabled} onPress={onPress}>
-      <ButtonText>{text}</ButtonText>
+      {loading ? <ActivityIndicator color="white" /> : <ButtonText>{text}</ButtonText>}
     </Button>
   );
 }

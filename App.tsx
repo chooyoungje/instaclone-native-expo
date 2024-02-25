@@ -5,8 +5,10 @@ import * as Font from "expo-font";
 import { Asset } from "expo-asset";
 import LoggedOutNav from "./navigator/LoggedOutNav";
 import { NavigationContainer } from "@react-navigation/native";
-import { Appearance, useColorScheme, StyleSheet } from "react-native";
-import { ThemeProvider } from "styled-components";
+import { useColorScheme, StyleSheet } from "react-native";
+
+import { ApolloProvider } from "@apollo/client";
+import client from "./apollo";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -27,11 +29,11 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={themeContainerStyle}>
+    <ApolloProvider client={client}>
       <NavigationContainer>
         <LoggedOutNav />
       </NavigationContainer>
-    </ThemeProvider>
+    </ApolloProvider>
   );
 }
 

@@ -17,8 +17,12 @@ export default function Login({ navigation }: any) {
     nextOne?.current?.focus();
   };
   useEffect(() => {
-    register("username");
-    register("password");
+    register("username", {
+      required: true,
+    });
+    register("password", {
+      required: true,
+    });
     // react에서와 다르게 TextInput에서 register를 안 한다
   }, [register]);
   // 한번만 실행하거나 register가 바뀌면 실행될 것임
@@ -44,7 +48,7 @@ export default function Login({ navigation }: any) {
         autoCapitalize={"none"}
         onChangeText={(text: string) => setValue("password", text)}
       />
-      <AuthButton text="Log In" disabled={false} onPress={handleSubmit(onValid)} />
+      <AuthButton text="Log In" loading={true} onPress={handleSubmit(onValid)} />
     </AuthLayout>
   );
 }
