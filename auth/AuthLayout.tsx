@@ -1,5 +1,5 @@
 import React from "react";
-import { Keyboard, TouchableWithoutFeedback } from "react-native";
+import { Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform } from "react-native";
 import styled from "styled-components/native";
 
 const Container = styled.View`
@@ -13,19 +13,28 @@ const Logo = styled.Image`
   max-width: 80%;
   width: 100%;
   height: 150px;
+  margin: 0 auto;
 `;
-// web애서 보이게 할려면 widhth를 설정해줘야함
-// max-width => 핸드폰
+
 export default function AuthLayout({ children }: any) {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
-    //react native의 keyboard api 사용
   };
   return (
-    <TouchableWithoutFeedback style={{ height: "100%" }} onPress={dismissKeyboard}>
+    <TouchableWithoutFeedback style={{ height: "100%" }} onPress={dismissKeyboard} disabled={Platform.OS === "web"}>
       <Container>
-        <Logo resizeMode="center" source={require("../assets/logo.png")} />
-        {children}
+        <KeyboardAvoidingView
+          behavior="padding"
+          keyboardVerticalOffset={Platform.OS === "ios" ? 30 : 50}
+          style={{
+            width: "100%",
+            flex: 1,
+            justifyContent: "center",
+          }}
+        >
+          <Logo resizeMode="center" source={require("../assets/logo.png")} />
+          {children}
+        </KeyboardAvoidingView>
       </Container>
     </TouchableWithoutFeedback>
   );
